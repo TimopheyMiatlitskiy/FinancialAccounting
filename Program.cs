@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using FinancialAccounting.Data;
+using Microsoft.Extensions.DependencyInjection;
+
 namespace FinancialAccounting
 {
     public class Program
@@ -12,6 +14,13 @@ namespace FinancialAccounting
 
             builder.Services.AddDbContext<ApiContext>
                 (opt => opt.UseInMemoryDatabase("RigistrationDB"));
+            //builder.Services.AddDbContext<ApiContext>
+            //    (options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+            var connectionString = "здесь строка подключения к вашей базе данных MSSQL Server";
+
+            builder.Services.AddDbContext<ApiContext>(options =>
+                options.UseSqlServer(connectionString));
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -29,8 +38,7 @@ namespace FinancialAccounting
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
-
+            //app.UseAuthorization();
 
             app.MapControllers();
 

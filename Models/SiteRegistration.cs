@@ -1,12 +1,12 @@
-﻿namespace FinancialAccounting.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FinancialAccounting.Models
 {
     public class SiteRegistration
     {
         public int Id { get; set; }
-        public string? FirstName { get; set; }
-        public string? Property1 { get; set; }
-        public string? LastName { get; set;}
+        [DataType(DataType.EmailAddress)]
         public string? Email { get; set; }
-
+        public string? Password { get; set; }
     }
 }

@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using FinancialAccounting.Models;
 using FinancialAccounting.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinancialAccounting.Controllers
 {
@@ -16,27 +16,6 @@ namespace FinancialAccounting.Controllers
             _context = context;
         }
 
-        // Creat/Edit
-        //[HttpPost]
-        //public JsonResult CreateEdit(SiteRegistration siteRegistration)
-        //{
-        //    if (siteRegistration.Id == 0)
-        //    {
-        //        _context.Registrations.Add(siteRegistration);
-        //    }
-        //    else
-        //    {
-        //        var registrationInDb = _context.Registrations.Find(siteRegistration);
-
-        //        if (registrationInDb == null)
-        //            return new JsonResult(NotFound());
-        //        registrationInDb = siteRegistration;
-        //    }
-
-        //    _context.SaveChanges();
-        //    return new JsonResult(Ok(siteRegistration));
-        //}
-
         [HttpPost]
         public IActionResult CreateEdit(SiteRegistration siteRegistration)
         {
@@ -50,8 +29,7 @@ namespace FinancialAccounting.Controllers
 
                 if (registrationInDb == null)
                     return NotFound();
-                registrationInDb.Property1 = siteRegistration.Property1; // пример замены свойств
-                                                                         // Добавьте сюда присваивание остальных свойств
+                registrationInDb.Id = siteRegistration.Id;
             }
 
             _context.SaveChanges();
@@ -68,6 +46,7 @@ namespace FinancialAccounting.Controllers
 
             return new JsonResult(Ok(result));
         }
+
         [HttpDelete]
         public JsonResult Delete(int id)
         {

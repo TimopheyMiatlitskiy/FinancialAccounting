@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using FinancialAccounting.Models;
 namespace FinancialAccounting.Data
 {
@@ -8,7 +7,6 @@ namespace FinancialAccounting.Data
         public DbSet<SiteRegistration> Registrations { get; set; }
         public ApiContext(DbContextOptions<ApiContext> options) :base(options)
         {
-            Database.EnsureCreated();   // создаем базу данных при первом обращении
         }
     }
 }
